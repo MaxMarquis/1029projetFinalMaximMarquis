@@ -1,0 +1,10 @@
+#monActive {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#formulaire {
+    background-color: rgba(126, 1, 1, 0.15);
+    padding: 2em;
+    border-radius: 3em;
+}
