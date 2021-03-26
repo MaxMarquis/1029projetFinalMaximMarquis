@@ -105,7 +105,8 @@
     }
 
     var email = document.getElementById("email");
-    var emailValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    // https://regexr.com/3e48o
+    var emailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     var invalidEmail = document.getElementById("invalidEmail");
     var invalidSubject = document.getElementById("invalidSubject");
     var msg = document.getElementById("msg");
