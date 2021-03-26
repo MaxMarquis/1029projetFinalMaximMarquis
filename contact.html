@@ -60,21 +60,25 @@
 
     <!-- Formulaire -->
     <div class="container" id="formulaire">
-        <form>
+        <form id="contactForm">
             <div class="form-group">
                 <label for="email" class="mr-2">Email: </label>
                 <input type="email" class="form-control col-5" id="email" placeholder="Adresse Email">
+                <span id="invalidEmail"></span>
             </div>
             <div class="form-group">
                 <label for="sujet" class="mr-2">Sujet </label>
-                <select id="sujet" class="form-control col-5">
-                </select>
+                <select id="sujet" class="form-control col-5"></select>
+                <span id="invalidSubject"></span>
             </div>
             <div class="form-group">
-                <label for="zoneTexte">Message: </label>
-                <textarea class="form-control" id="zoneTexte" rows="4"></textarea>
+                <label for="msg">Message: </label>
+                <textarea class="form-control" id="msg" rows="4"></textarea>
+                <span id="invalidMsg"></span>
             </div>
+            <button onclick="validation()" type="button" class="btn btn-primary">Envoyer</button>
         </form>
+        <div id="msgEnvoye"></div>
     </div>
 
 
@@ -90,7 +94,7 @@
 </html>
 <script>
     var select = document.getElementById("sujet");
-    var options = ["Problème Technique", "Logiciel", "Pilote", "Version", "Modèle", "Garantie"];
+    var options = ["Sélectionner un sujet", "Problème Technique", "Logiciel", "Pilote", "Version", "Modèle", "Garantie"];
 
     for (var i = 0; i < options.length; i++) {
         var opt = options[i];
@@ -98,5 +102,41 @@
         el.textContent = opt;
         el.value = opt;
         select.appendChild(el);
+    }
+
+    var email = document.getElementById("email");
+    var emailValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var invalidEmail = document.getElementById("invalidEmail");
+    var invalidSubject = document.getElementById("invalidSubject");
+    var msg = document.getElementById("msg");
+    var invalidMsg = document.getElementById("invalidMsg");
+
+    function validation() {
+        document.getElementById("msgEnvoye").innerHTML = "";
+        invalidEmail.textContent = "";
+        invalidSubject.textContent = "";
+        invalidMsg.textContent = "";
+        if (emailValid.test(email.value) == false) {
+            invalidEmail.textContent = "Adresse mail non valide.";
+            invalidEmail.style.color = "red";
+            return
+        }
+        if (select.value == "Sélectionner un sujet") {
+            invalidSubject.textContent = "Veuillez sélectionner un sujet.";
+            invalidSubject.style.color = "red";
+            return
+        }
+        if (msg.value.length === 0) {
+            invalidMsg.textContent = "Veuillez entrer un message."
+            invalidMsg.style.color = "red";
+            return
+        }
+        send();
+    }
+
+    function send() {
+        invalidEmail.textContent = "";
+        document.getElementById("contactForm").reset();
+        document.getElementById("msgEnvoye").innerHTML = "Le message à été envoyé !";
     }
 </script>

@@ -5,6 +5,17 @@
 }
 #formulaire {
     background-color: rgba(126, 1, 1, 0.15);
+    border-color: rgba(0, 0, 0);
     padding: 2em;
-    border-radius: 3em;
+    border-radius: 1rem;
+    margin-top: 2rem;
+}
+#formulaire button {
+    background-color: rgba(255, 0, 0, 0.438);
+    border-color: rgb(0, 0, 0);
+}
+#msgEnvoye {
+    margin-top: 1rem;
+    color: green;
+    font-size: 1.2em;
 }
