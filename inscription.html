@@ -59,7 +59,74 @@
         </div>
     </div>
 
-
+    <div class="container formulaire">
+        <form id="formulaireInscription">
+            <!-- Nom -->
+            <div class="form-group ">
+                <label for="nom">Nom:</label>
+                <input type="text" class="form-control" name="nom" id="nom">
+                <span id="invalidNom"></span>
+            </div>
+            <!-- Prénom -->
+            <div class="form-group">
+                <label for="prenom">Prénom:</label>
+                <input type="text" class="form-control" name="prenom" id="prenom">
+                <span id="invalidPrenom"></span>
+            </div>
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Adresse Email:</label>
+                <input type="email" class="form-control" name="email" id="email">
+                <span id="invalidEmail"></span>
+            </div>
+            <!-- Confirmation Email -->
+            <div class="form-group">
+                <label for="emailConf">Confirmaiton adresse email:</label>
+                <input type="email" class="form-control" name="emailConf" id="emailConf">
+                <span id="invalidEmailConf"></span>
+            </div>
+            <!-- Mdp -->
+            <div class="form-group">
+                <label for="mdp">Mot de passe:</label>
+                <input type="password" class="form-control" name="mdp" id="mdp">
+                <span id="invalidMdp"></span>
+            </div>
+            <!-- Confirmation mdp -->
+            <div class="form-group">
+                <label for="mdpConf">Confirmation mot de passe:</label>
+                <input type="password" class="form-control" name="mdpConf" id="mdpConf">
+                <span id="invalidMdpConf"></span>
+            </div>
+            <!-- Genre -->
+            <div class="form-group row">
+                <legend class="col-form-label ml-3">Genre:</legend>
+                <div class="form-check ml-3">
+                    <input class="form-check-input" type="radio" name="radioGenre" id="radio1" value="option1">
+                    <label class="form-check-label mr-3" for="radio1">
+                        Homme
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioGenre" id="radio2" value="option2">
+                    <label class="form-check-label mr-3" for="radio2">
+                        Femme
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioGenre" id="radio3" value="option3">
+                    <label class="form-check-label" for="radio3">
+                        Autre
+                    </label>
+                </div>
+            </div>
+            <!-- Ville -->
+            <div class="form-group">
+                <label for="ville">Ville:</label>
+                <select id="ville" class="form-control"></select>
+            </div>
+            <button type="button" onclick="validation()" class="btn btn-primary">Inscription</button>
+        </form>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -70,3 +137,68 @@
 </body>
 
 </html>
+<script>
+    var ville = document.getElementById("ville");
+    var listeVille = ["Montréal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Lévis", "Saguenay", "Trois-Rivières", "Terrebonne", "Saint-Jean-Sur-Richelieu", "Brossard", "Repentigny"];
+    for (var i = 0; i < listeVille.length; i++) {
+        var opt = listeVille[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        ville.appendChild(el);
+    }
+
+    var nom = document.getElementById("nom");
+    var prenom = document.getElementById("prenom");
+    var email = document.getElementById("email");
+    var emailConf = document.getElementById("emailConf");
+    var mdp = document.getElementById("mdp");
+    var mdpConf = document.getElementById("mdpConf");
+
+    var invalidNom = document.getElementById("invalidNom");
+    var invalidPrenom = document.getElementById("invalidPrenom");
+    var invalidEmail = document.getElementById("invalidEmail");
+    var invalidEmailConf = document.getElementById("invalidEmailConf");
+    var invalidMdp = document.getElementById("invalidMdp");
+    var invalidMdpConf = document.getElementById("invalidMdpConf");
+    function validation() {
+        // alert("test")
+        if (nom.value.length == 0) {
+            invalidNom.textContent = "Veuillez entrer votre Nom";
+            invalidNom.style.color = "red";
+            return
+        } invalidNom.textContent = "";
+        if (prenom.value.length == 0) {
+            invalidPrenom.textContent = "Veuillez entrer votre Prénom";
+            invalidPrenom.style.color = "red";
+            return
+        } invalidPrenom.textContent = "";
+        if (email.value.length == 0) {
+            invalidEmail.textContent = "Veuillez entrer votre Adresse email";
+            invalidEmail.style.color = "red";
+            return
+        } invalidEmail.textContent = "";
+        if (emailConf.value.length == 0) {
+            invalidEmailConf.textContent = "Veuillez confirmer votre adresse email";
+            invalidEmailConf.style.color = "red";
+            return
+        } invalidEmailConf.textContent = "";
+        if (mdp.value.length == 0) {
+            invalidMdp.textContent = "Veuillez entrer votre Mot de passe";
+            invalidMdp.style.color = "red";
+            return
+        } invalidMdp.textContent = "";
+        if (mdpConf.value.length == 0) {
+            invalidMdpConf.textContent = "Veuillez confirmer votre mot de passe";
+            invalidMdpConf.style.color = "red";
+            return
+        } invalidMdpConf.textContent = "";
+        inscriptionTermine();
+    }
+
+    function inscriptionTermine() {
+        document.getElementById("formulaireInscription").reset();
+        alert("Inscription terminé ! Vous pouvez maintenant vous connecter.");
+        window.location.replace("login.html");
+    }
+</script>
