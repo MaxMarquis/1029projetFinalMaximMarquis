@@ -24,7 +24,8 @@
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="inscription.html">Inscription</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link active" id="monActive" href="calculatrice.html">Calculatrice</a>
+                <li class="nav-item"><a class="nav-link active" id="monActive"
+                        href="convertisseur.html">Convertisseur</a>
                 </li>
             </ul>
         </nav>
@@ -59,6 +60,34 @@
         </div>
     </div>
 
+    <div class="container monProfil">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Convertisseur Devise</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input type="number" id="nombre1" value="1">
+                <select name="devise" id="devise1">
+                    <option value="euro">Euro</option>
+                    <option value="cad">Dollar canadien</option>
+                    <option value="us">US Dollar</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input type="number" id="nombre2" value="1.48">
+                <select name="devise" id="devise2">
+                    <option value="cad">Dollar canadien</option>
+                    <option value="euro">Euro</option>
+                    <option value="us">US Dollar</option>
+                </select>
+            </div>
+        </div>
+        <button onclick="convertion()" class=" mt-2">Convertir</button>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -70,3 +99,47 @@
 </body>
 
 </html>
+<script>
+    function convertion() {
+        var nombre1 = document.getElementById("nombre1").value;
+        var nombre2 = document.getElementById("nombre2").value;
+        var selObj1 = document.getElementById("devise1");
+        var selValue1 = selObj1.options[selObj1.selectedIndex].value;
+        var selObj2 = document.getElementById("devise2");
+        var selValue2 = selObj2.options[selObj2.selectedIndex].value;
+        console.log(selValue1);
+        console.log(selValue2);
+
+        // euro to =>
+        if (selValue1 === "euro" && selValue2 === "cad") {
+            nombre2 = nombre1 * 1.4819732;
+        }
+        if (selValue1 === "euro" && selValue2 === "us") {
+            nombre2 = nombre1 * 1.1770363;
+        }
+        if (selValue1 === "euro" && selValue2 === "euro") {
+            nombre2 = nombre1 * 1;
+        }
+        // cad to =>
+        if (selValue1 === "cad" && selValue2 == "euro") {
+            nombre2 = nombre1 * 0.67479909;
+        }
+        if (selValue1 === "cad" && selValue2 == "us") {
+            nombre2 = nombre1 * 0.79439053;
+        }
+        if (selValue1 === "cad" && selValue2 == "cad") {
+            nombre2 = nombre1 * 1;
+        }
+        // us to =>
+        if (selValue1 === "us" && selValue2 == "euro") {
+            nombre2 = nombre1 * 0.84959149;
+        }
+        if (selValue1 === "us" && selValue2 == "cad") {
+            nombre2 = nombre1 * 1.2588267;
+        }
+        if (selValue1 === "us" && selValue2 == "us") {
+            nombre2 = nombre1 * 1;
+        }
+        document.getElementById("nombre2").value = nombre2.toFixed(2);
+    }
+</script>

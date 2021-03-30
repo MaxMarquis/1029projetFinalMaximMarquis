@@ -25,7 +25,7 @@
                 <li class="nav-item"><a class="nav-link active" id="monActive" href="inscription.html">Inscription</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="calculatrice.html">Calculatrice</a></li>
+                <li class="nav-item"><a class="nav-link" href="convertisseur.html">Convertisseur</a></li>
             </ul>
         </nav>
     </header>
@@ -88,13 +88,13 @@
             <!-- Mdp -->
             <div class="form-group">
                 <label for="mdp">Mot de passe:</label>
-                <input type="password" class="form-control" name="mdp" id="mdp">
+                <input type="text" class="form-control" name="mdp" id="mdp">
                 <span id="invalidMdp"></span>
             </div>
             <!-- Confirmation mdp -->
             <div class="form-group">
                 <label for="mdpConf">Confirmation mot de passe:</label>
-                <input type="password" class="form-control" name="mdpConf" id="mdpConf">
+                <input type="text" class="form-control" name="mdpConf" id="mdpConf">
                 <span id="invalidMdpConf"></span>
             </div>
             <!-- Genre -->
@@ -161,6 +161,10 @@
     var invalidEmailConf = document.getElementById("invalidEmailConf");
     var invalidMdp = document.getElementById("invalidMdp");
     var invalidMdpConf = document.getElementById("invalidMdpConf");
+
+    var emailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    var mdpValid = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/g;
+
     function validation() {
         // alert("test")
         if (nom.value.length == 0) {
@@ -173,9 +177,12 @@
             invalidPrenom.style.color = "red";
             return
         } invalidPrenom.textContent = "";
-        if (email.value.length == 0) {
-            invalidEmail.textContent = "Veuillez entrer votre Adresse email";
+        // Bon ici je comprends pas pourquoi il rentre dans le if meme si ma condition est true ... 
+        if (email.value.length == 0 || emailValid.test(email.value) == false) {
+            invalidEmail.textContent = "Adresse email non valide";
             invalidEmail.style.color = "red";
+            // console.log("email validation " + emailValid.test(email.value));
+            // console.log("email length: " + email.value.length);
             return
         } invalidEmail.textContent = "";
         if (emailConf.value.length == 0) {
@@ -183,9 +190,12 @@
             invalidEmailConf.style.color = "red";
             return
         } invalidEmailConf.textContent = "";
-        if (mdp.value.length == 0) {
-            invalidMdp.textContent = "Veuillez entrer votre Mot de passe";
+        // Meme chose pour ici, quand je cliques plusieurs fois sur le boutton inscription il rentre dans la boucle
+        if (mdp.value.length == 0 || mdpValid.test(mdp.value) == false) {
+            invalidMdp.textContent = "Mot de passe non valide";
             invalidMdp.style.color = "red";
+            // console.log("mdp validation " + mdpValid.test(mdp.value));
+            // console.log("mdp length: " + mdp.value.length);
             return
         } invalidMdp.textContent = "";
         if (mdpConf.value.length == 0) {
