@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label for="mdp">Mot de passe:</label>
-                    <input type="text" class="form-control" name="mdp" id="mdp">
+                    <input type="password" class="form-control" name="mdp" id="mdp">
                     <span id="invalidMdp"></span>
                 </div>
                 <button type="button" onclick="validation()" class="btn btn-primary">Login</button>
@@ -91,22 +91,24 @@
 
 </html>
 <script>
+
     var email = document.getElementById("email");
     var mdp = document.getElementById("mdp");
 
-    var emailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    var mdpValid = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/g;
-
     function validation() {
-        if (email.value.length === 0 || emailValid.test(email.value) == false) {
+
+        var emailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        var mdpValid = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/g;
+
+        if (email.value.length === 0 || emailValid.test(email.value) === false) {
             invalidEmail.textContent = "L'adresse email n'est pas valide";
             invalidEmail.style.color = "red";
-            return
+            return;
         } invalidEmail.textContent = "";
         if (mdp.value.length == 0 || mdpValid.test(mdp.value) == false) {
             invalidMdp.textContent = "Mot de passe non valide";
             invalidMdp.style.color = "red";
-            return
+            return;
         } invalidMdp.textContent = "";
         login();
     }
